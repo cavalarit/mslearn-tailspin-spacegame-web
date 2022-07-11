@@ -11,6 +11,14 @@ pool:
   demands:
   - npm
 
+strategy:
+  matrix:
+    Python36:
+      python.version: '3.6'
+    Python37:
+      python.version: '3.7'
+  maxParallel: 2
+
 variables:
   buildConfiguration: 'Release'
   wwwrootDir: 'Tailspin.SpaceGame.Web/wwwroot'
@@ -19,14 +27,18 @@ variables:
 steps:
 - task: UsePythonVersion@0
   inputs:
-    versionSpec: '3.6'
-
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: '3.6'
-  script: python -m pip install --upgrade pip
-  displayName: 'Install tools'    
-
+    versionSpec: '$(python.version)'
+- script: |
+    python -m pip install --upgrade pip
+    cd flask-basic
+    pip install '.[test]'
+  displayName: 'Install dependencies'
+- script: |
+    pip install pytest
+    cd flask-basic
+    pytest --junitxml=../reports/flask-basic.xml
+  displayName: 'Run tests'
+  
 - task: UseDotNet@2
   displayName: 'Use .NET SDK $(dotnetSdkVersion)'
   inputs:
