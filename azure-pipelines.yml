@@ -11,11 +11,11 @@ pool:
   demands:
   - npm
 
-strategy:
-  matrix:
-    Python37:
-      python.version: '3.7'
-  maxParallel: 2
+# strategy:
+#   matrix:
+#     Python37:
+#       python.version: '3.7'
+#   maxParallel: 2
 
 variables:
   buildConfiguration: 'Release'
