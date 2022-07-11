@@ -31,7 +31,7 @@ steps:
   displayName: 'Install Python dependencies'
 - script: |
     pip install paconn
-  displayName: Install paconn
+  displayName: Install paconn test2
 
 - task: UseDotNet@2
   displayName: 'Use .NET SDK $(dotnetSdkVersion)'
