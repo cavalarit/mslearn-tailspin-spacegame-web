@@ -13,8 +13,6 @@ pool:
 
 strategy:
   matrix:
-    Python36:
-      python.version: '3.6'
     Python37:
       python.version: '3.7'
   maxParallel: 2
@@ -30,15 +28,8 @@ steps:
     versionSpec: '$(python.version)'
 - script: |
     python -m pip install --upgrade pip
-    cd flask-basic
-    pip install '.[test]'
   displayName: 'Install dependencies'
-- script: |
-    pip install pytest
-    cd flask-basic
-    pytest --junitxml=../reports/flask-basic.xml
-  displayName: 'Run tests'
-  
+
 - task: UseDotNet@2
   displayName: 'Use .NET SDK $(dotnetSdkVersion)'
   inputs:
