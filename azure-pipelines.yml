@@ -17,6 +17,16 @@ variables:
   dotnetSdkVersion: '6.x'
 
 steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.6'
+
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.6'
+  script: python -m pip install --upgrade pip
+  displayName: 'Install tools'    
+
 - task: UseDotNet@2
   displayName: 'Use .NET SDK $(dotnetSdkVersion)'
   inputs:
